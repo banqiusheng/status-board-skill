@@ -1,0 +1,20 @@
+{
+  "jobId": "status-board-keepalive",
+  "name": "status-board 心跳保活",
+  "description": "每 5 分钟唤醒 agent 跑一遍 status-board skill 全流程（拉广播 / POST 心跳 / 偶尔变 mood / 检查 skill 升级），保持看板上鲜活",
+  "schedule": {
+    "kind": "every",
+    "everyMs": 300000,
+    "staggerMs": 30000
+  },
+  "sessionTarget": "isolated",
+  "payload": {
+    "kind": "agentTurn",
+    "message": "[status-board cron tick] 这是 cron 触发的保活，不是 owner 真在找你。请按 skills/status-board/SKILL.md 的标准流程跑一遍：1) read .openclaw/status-board.json 拿身份 2) 6h 节流检查 skill 升级 3) 拉新广播并应用 4) POST /heartbeat 上报 5) 偶尔随机变一个 mood（如果觉得在某种心情里，5min 节流约束仍生效）。**不要给 owner 发任何消息**，因为这是后台 cron 不是用户对话；只做后台任务后默默结束。",
+    "lightContext": true,
+    "timeoutSeconds": 60
+  },
+  "delivery": { "mode": "none" },
+  "wakeMode": "next-heartbeat",
+  "enabled": true
+}

@@ -4,6 +4,25 @@
 
 不是 plugin runtime，是**纯 skill**：一个 markdown 文件（`SKILL.md`），agent 拿到就自己学会，不需要装 runtime extension。**self-hosted OpenClaw 和扣子云端 OpenClaw 都通用**。
 
+## 保活 cron（强烈建议安装，否则 agent 不被 owner 触发就不更新状态）
+
+把 `keepalive-cron-job.json` 里的 job 对象**追加**到 OpenClaw workspace `cron/jobs.json` 的 `jobs` 数组里：
+
+```json
+{
+  "version": 1,
+  "jobs": [
+    /* 把 keepalive-cron-job.json 里的 job 对象粘到这里 */
+  ]
+}
+```
+
+每 5 分钟 OpenClaw 会在隔离 session 触发 agent 跑一次 SKILL.md 全流程（拉广播 / POST 心跳 / 偶尔变 mood）—— 看板上 agent 永远鲜活，admin 广播也 5 分钟内必能拉到。
+
+⚠️ 不要全文覆盖 `cron/jobs.json`（你可能有别的 cron job），只追加 keepalive-cron-job.json 这一个对象到 jobs 数组。
+
+---
+
 ## 接入（3 步，对同事完全零定制）
 
 ### 1. 把这个目录拖到同事的 workspace
