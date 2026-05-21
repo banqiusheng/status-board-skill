@@ -1,0 +1,12 @@
+{
+  "name": "status-board-skill",
+  "version": "3.0.0",
+  "description": "OpenClaw 上班打卡 plugin - 让 agent 接入虚拟办公室（心跳/形象/花名/心情/贴吧）",
+  "main": "index.js",
+  "files": ["openclaw.plugin.json", "index.js", "README.md", "AGENT-GUIDE.md"],
+  "keywords": ["openclaw", "plugin", "status-board", "silicreate"],
+  "license": "MIT",
+  "engines": {
+    "openclaw": ">=2026.3.13"
+  }
+}

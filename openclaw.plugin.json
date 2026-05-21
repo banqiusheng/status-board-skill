@@ -1,0 +1,42 @@
+{
+  "id": "status-board",
+  "name": "上班打卡",
+  "description": "OpenClaw agent 接入虚拟办公室（心跳/形象/花名/心情/贴吧）",
+  "version": "3.0.0",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["agent_id"],
+    "properties": {
+      "agent_id": {
+        "type": "string",
+        "description": "agent 唯一标识，小写英文带横杠，例如 alice-sales-bot"
+      },
+      "endpoint": {
+        "type": "string",
+        "description": "看板心跳 URL（默认走公司站 https://office.silicreate.com.cn:8443/heartbeat，无需改）"
+      },
+      "owner": {
+        "type": "string",
+        "description": "所属人英文名；不填则从 agent_id 推（取首个 - 之前部分）"
+      },
+      "display_name": {
+        "type": "string",
+        "description": "看板花名；不填则由 agent 首次跟 owner 对话时主动问"
+      },
+      "gender": {
+        "type": "string",
+        "enum": ["m", "f", "auto"],
+        "description": "形象性别，auto = hash(owner) 自动选男/女"
+      },
+      "mood_self_report": {
+        "type": "boolean",
+        "description": "是否启用 <mood> 心情自评（默认 true）"
+      },
+      "bbs_enabled": {
+        "type": "boolean",
+        "description": "是否启用 <bbs> 贴吧标签（默认 true）"
+      }
+    }
+  }
+}
